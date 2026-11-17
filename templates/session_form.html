@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ action }} session</h1>
+<form method="post">
+ <label>Conference <select name="conference_id" required>
+  {% for c in conferences %}<option value="{{ c.conference_id }}" {{ 'selected' if s.get('conference_id')|string == c.conference_id|string }}>{{ c.conference_id }} - {{ c.acronym }} ({{ c.city }})</option>{% endfor %}
+ </select></label>
+ <label>Title <input type="text" name="title" value="{{ s.get('title') or '' }}" required></label>
+ <label>Date <input type="date" name="session_date" value="{{ s.get('session_date') or '' }}" required></label>
+ <label>Start time <input type="time" name="start_time" value="{{ s.get('start_time') or '' }}" required></label>
+ <label>End time <input type="time" name="end_time" value="{{ s.get('end_time') or '' }}" required></label>
+ <label>Room label <input type="text" name="room_label" value="{{ s.get('room_label') or '' }}" required></label>
+ <label>Chair <select name="chair_id" required>
+  {% for v in reviewers %}<option value="{{ v.reviewer_id }}" {{ 'selected' if s.get('chair_id')|string == v.reviewer_id|string }}>{{ v.reviewer_id }} - {{ v.name }}</option>{% endfor %}
+ </select></label>
+ <p><button type="submit">{{ action }}</button></p>
+</form>
+{% endblock %}

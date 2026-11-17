@@ -1,0 +1,3 @@
+Video presentation (Google Drive): <PASTE GOOGLE DRIVE LINK HERE>
+Application URL: <PASTE DEPLOYED URL HERE, e.g. https://conference-app.onrender.com>
+Demo account credentials: none required (authentication is not part of the assignment)

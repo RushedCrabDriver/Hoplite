@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>accepted_paper_schedule (database view)</h1>
+<table>
+ <tr><th>Paper</th><th>Title</th><th>Conference</th><th>Track</th><th>Session</th><th>Date</th>
+     <th>Time</th><th>Room</th><th>Chair</th><th>Corresponding author</th></tr>
+ {% for i in items %}
+ <tr><td>{{ i.paper_id }}</td><td>{{ i.paper_title }}</td><td>{{ i.conference_id }} {{ i.conference_acronym }}</td>
+     <td>{{ i.track_name }}</td><td>{{ i.session_id }} {{ i.session_title }}</td><td>{{ i.session_date }}</td>
+     <td>{{ i.start_time }}&ndash;{{ i.end_time }}</td><td>{{ i.room_label }}</td><td>{{ i.chair_full_name }}</td>
+     <td>{{ i.corresponding_author_name }} ({{ i.corresponding_author_email }})</td></tr>
+ {% endfor %}
+</table>
+{% endblock %}

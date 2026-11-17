@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Papers</h1>
+<p><a href="{{ url_for('paper_new') }}">+ New paper</a></p>
+<table>
+ <tr><th>ID</th><th>Title</th><th>Status</th><th>Conference / track</th><th>Corresponding author</th><th>Session</th><th>Reviews</th></tr>
+ {% for p in items %}
+ <tr><td><a href="{{ url_for('paper_detail', pid=p.paper_id) }}">{{ p.paper_id }}</a></td><td>{{ p.title }}</td>
+     <td>{{ p.status }}</td><td>{{ p.acronym }} / {{ p.track }}</td><td>{{ p.corresponding }}</td>
+     <td>{% if p.session_id %}<a href="{{ url_for('session_detail', sid=p.session_id) }}">{{ p.session_id }}</a>{% endif %}</td>
+     <td>{{ p.reviews }}</td></tr>
+ {% endfor %}
+</table>
+{% endblock %}

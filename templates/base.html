@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>{% block title %}Conference Management{% endblock %}</title>
+<style>
+ body { font-family: sans-serif; margin: 1.5em; }
+ nav a { margin-right: 1em; }
+ table { border-collapse: collapse; margin: .5em 0; }
+ th, td { border: 1px solid #bbb; padding: 3px 7px; text-align: left; vertical-align: top; }
+ .flash-success { background: #dfd; border: 1px solid #5a5; padding: .5em; margin: .5em 0; }
+ .flash-error { background: #fdd; border: 1px solid #c55; padding: .5em; margin: .5em 0; }
+ form.inline { display: inline; }
+ label { display: block; margin-top: .5em; }
+ input[type=text], input[type=email], textarea, select { min-width: 22em; }
+ fieldset { margin-top: 1em; }
+</style>
+</head>
+<body>
+<nav>
+ <a href="{{ url_for('index') }}">Home</a>
+ <a href="{{ url_for('users') }}">Users</a>
+ <a href="{{ url_for('papers') }}">Papers</a>
+ <a href="{{ url_for('reviews') }}">Reviews</a>
+ <a href="{{ url_for('sessions') }}">Sessions</a>
+ <a href="{{ url_for('conferences') }}">Conferences &amp; tracks</a>
+ <a href="{{ url_for('schedule') }}">Schedule (view)</a>
+</nav>
+<hr>
+{% for category, message in get_flashed_messages(with_categories=true) %}
+ <div class="flash-{{ category }}">{{ message }}</div>
+{% endfor %}
+{% block content %}{% endblock %}
+</body>
+</html>

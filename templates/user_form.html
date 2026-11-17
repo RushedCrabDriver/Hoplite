@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ action }} user</h1>
+<form method="post">
+ {% for field, label in [('given_name','Given name'),('surname','Surname'),('email','Email'),
+     ('affiliation','Affiliation'),('country','Country'),('phone_number','Phone number')] %}
+ <label>{{ label }} <input type="{{ 'email' if field == 'email' else 'text' }}" name="{{ field }}" value="{{ user.get(field) or '' }}" required></label>
+ {% endfor %}
+ <fieldset><legend><label><input type="checkbox" name="is_author" {{ 'checked' if user.get('is_author') == 'on' }}> Author</label></legend>
+  <label>ORCID (optional) <input type="text" name="orcid" value="{{ user.get('orcid') or '' }}"></label>
+  <label>Research areas (comma-separated) <input type="text" name="research_areas" value="{{ user.get('research_areas') or '' }}"></label>
+ </fieldset>
+ <fieldset><legend><label><input type="checkbox" name="is_reviewer" {{ 'checked' if user.get('is_reviewer') == 'on' }}> Reviewer</label></legend>
+  <label>Years of reviewing experience <input type="number" name="years_experience" value="{{ user.get('years_experience') if user.get('years_experience') is not none else '' }}"></label>
+  <label>Expertise areas (comma-separated) <input type="text" name="expertise_areas" value="{{ user.get('expertise_areas') or '' }}"></label>
+ </fieldset>
+ <p><button type="submit">{{ action }}</button></p>
+</form>
+{% endblock %}

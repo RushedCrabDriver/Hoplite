@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Sessions</h1>
+<p><a href="{{ url_for('session_new') }}">+ New session</a></p>
+<table>
+ <tr><th>ID</th><th>Conference</th><th>Title</th><th>Date</th><th>Time</th><th>Room</th><th>Chair</th><th>Papers</th></tr>
+ {% for s in items %}
+ <tr><td><a href="{{ url_for('session_detail', sid=s.session_id) }}">{{ s.session_id }}</a></td>
+     <td>{{ s.acronym }} ({{ s.city }})</td><td>{{ s.title }}</td><td>{{ s.session_date }}</td>
+     <td>{{ s.start_time }}&ndash;{{ s.end_time }}</td><td>{{ s.room_label }}</td><td>{{ s.chair }}</td><td>{{ s.papers }}</td></tr>
+ {% endfor %}
+</table>
+{% endblock %}

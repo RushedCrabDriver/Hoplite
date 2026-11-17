@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ action }} paper</h1>
+<form method="post">
+ <label>Track <select name="track_id" required>
+  {% for t in tracks %}<option value="{{ t.track_id }}" {{ 'selected' if p.get('track_id')|string == t.track_id|string }}>{{ t.track_id }} - {{ t.acronym }} / {{ t.name }}</option>{% endfor %}
+ </select></label>
+ <label>Title <input type="text" name="title" value="{{ p.get('title') or '' }}" required></label>
+ <label>Abstract <textarea name="abstract" rows="4" required>{{ p.get('abstract') or '' }}</textarea></label>
+ <label>Submission date <input type="date" name="submission_date" value="{{ p.get('submission_date') or '' }}" required></label>
+ <label>Status <select name="status">
+  {% for s in statuses %}<option {{ 'selected' if p.get('status') == s }}>{{ s }}</option>{% endfor %}
+ </select></label>
+ <label>Session (only accepted papers; same conference as the track) <select name="session_id">
+  <option value="">-- not scheduled --</option>
+  {% for s in sessions %}<option value="{{ s.session_id }}" {{ 'selected' if p.get('session_id')|string == s.session_id|string }}>{{ s.session_id }} - {{ s.acronym }} / {{ s.title }}</option>{% endfor %}
+ </select></label>
+ <label>Keywords (comma-separated) <input type="text" name="keywords" value="{{ p.get('keywords') or '' }}" required></label>
+ <fieldset><legend>Authors in order (position = row order of filled rows); select the corresponding author</legend>
+ {% for i in slots %}
+  <div>{{ i + 1 }}.
+   <select name="author_{{ i }}"><option value="">--</option>
+   {% for a in authors %}<option value="{{ a.author_id }}" {{ 'selected' if p.get('author_' ~ i) == a.author_id|string }}>{{ a.name }} ({{ a.email }})</option>{% endfor %}
+   </select>
+   <label style="display:inline"><input type="radio" name="corresponding" value="{{ i }}" {{ 'checked' if p.get('corresponding') == i|string }}> corresponding</label>
+  </div>
+ {% endfor %}
+ </fieldset>
+ {% if action == 'Create' %}
+ <label>File location of version 1 <input type="text" name="file_location" value="{{ p.get('file_location') or '' }}" required></label>
+ {% endif %}
+ <p><button type="submit">{{ action }}</button></p>
+</form>
+{% endblock %}

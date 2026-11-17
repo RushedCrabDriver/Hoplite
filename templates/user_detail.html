@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>User {{ user.user_id }}: {{ user.given_name }} {{ user.surname }}</h1>
+<table>
+ <tr><th>Email</th><td>{{ user.email }}</td></tr>
+ <tr><th>Affiliation</th><td>{{ user.affiliation }}</td></tr>
+ <tr><th>Country</th><td>{{ user.country }}</td></tr>
+ <tr><th>Phone</th><td>{{ user.phone_number }}</td></tr>
+ <tr><th>Author</th><td>{% if user.is_author %}yes; ORCID: {{ user.orcid or '-' }}; research areas: {{ user.research_areas }}{% else %}no{% endif %}</td></tr>
+ <tr><th>Reviewer</th><td>{% if user.is_reviewer %}yes; {{ user.years_experience }} years; expertise: {{ user.expertise_areas }}{% else %}no{% endif %}</td></tr>
+ <tr><th>Reviewer pools</th><td>{% for c in pools %}{{ c.acronym }}{{ ', ' if not loop.last }}{% else %}-{% endfor %}</td></tr>
+</table>
+<p><a href="{{ url_for('user_edit', uid=user.user_id) }}">Edit</a>
+<form class="inline" method="post" action="{{ url_for('user_delete', uid=user.user_id) }}"
+      onsubmit="return confirm('Delete this user?')"><button>Delete</button></form></p>
+<h2>Authored papers</h2>
+<table><tr><th>Paper</th><th>Title</th><th>Status</th><th>Position</th><th>Corresponding</th></tr>
+{% for p in papers %}<tr><td><a href="{{ url_for('paper_detail', pid=p.paper_id) }}">{{ p.paper_id }}</a></td><td>{{ p.title }}</td>
+<td>{{ p.status }}</td><td>{{ p.author_position }}</td><td>{{ 'yes' if p.is_corresponding }}</td></tr>{% endfor %}</table>
+<h2>Reviews written</h2>
+<table><tr><th>Review</th><th>Paper</th><th>Score</th><th>Recommendation</th></tr>
+{% for r in reviews %}<tr><td><a href="{{ url_for('review_detail', rid=r.review_id) }}">{{ r.review_id }}</a></td>
+<td>{{ r.paper_id }} {{ r.title }}</td><td>{{ r.overall_score }}</td><td>{{ r.recommendation }}</td></tr>{% endfor %}</table>
+{% endblock %}

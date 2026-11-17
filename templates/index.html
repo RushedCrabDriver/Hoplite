@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Research Conference and Paper Review Management System</h1>
+<p>CSCI 341 Assignment 3 administrative interface.</p>
+<table>
+ <tr><th>Users</th><td>{{ counts.users }}</td></tr>
+ <tr><th>Papers</th><td>{{ counts.papers }}</td></tr>
+ <tr><th>Reviews</th><td>{{ counts.reviews }}</td></tr>
+ <tr><th>Sessions</th><td>{{ counts.sessions }}</td></tr>
+ <tr><th>Conferences</th><td>{{ counts.conferences }}</td></tr>
+</table>
+{% endblock %}

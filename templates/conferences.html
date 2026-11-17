@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Conferences (read-only)</h1>
+<table>
+ <tr><th>ID</th><th>Name</th><th>Acronym</th><th>City</th><th>Country</th><th>Dates</th>
+     <th>Submission deadline</th><th>Review deadline</th><th>Hosts</th><th>Reviewer pool</th></tr>
+ {% for c in confs %}
+ <tr><td>{{ c.conference_id }}</td><td>{{ c.name }}</td><td>{{ c.acronym }}</td><td>{{ c.city }}</td>
+     <td>{{ c.country }}</td><td>{{ c.start_date }} &ndash; {{ c.end_date }}</td>
+     <td>{{ c.submission_deadline }}</td><td>{{ c.review_deadline }}</td>
+     <td>{{ c.hosts }}</td><td>{{ c.pool }}</td></tr>
+ {% endfor %}
+</table>
+<h2>Tracks (read-only)</h2>
+<table>
+ <tr><th>ID</th><th>Conference</th><th>Name</th><th>Research area</th><th>Coordinator</th><th>Papers</th></tr>
+ {% for t in tracks %}
+ <tr><td>{{ t.track_id }}</td><td>{{ t.conference_id }}</td><td>{{ t.name }}</td>
+     <td>{{ t.research_area }}</td><td>{{ t.coordinator }}</td><td>{{ t.papers }}</td></tr>
+ {% endfor %}
+</table>
+{% endblock %}
