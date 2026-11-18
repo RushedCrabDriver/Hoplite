@@ -4,9 +4,9 @@
 
 | Name | Student ID | Contribution |
 |---|---|---|
-| _Full name_ | _ID_ | _e.g. schema and sample data_ |
-| _Full name_ | _ID_ | _e.g. Part 2 queries_ |
-| _Full name_ | _ID_ | _e.g. web application and deployment_ |
+| _Sanzhar Mailebayev_ | _ID_ | _e.g. schema and sample data_ |
+| _Sanzhar Mailebayev_ | _ID_ | _e.g. Part 2 queries_ |
+| _Sanzhar Mailebayev_ | _ID_ | _e.g. web application and deployment_ |
 
 **Completed work**
 
